@@ -15,6 +15,10 @@ const ArtistUserSchema = new Schema({
     type: String,
     required: true,
   },
+  userType: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

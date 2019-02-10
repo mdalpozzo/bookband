@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
@@ -28,37 +29,43 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
+//passport middleware
+app.use(passport.initialize());
+
+//passport config
+require('./config/passport')(passport);
+
+  
+// Use Routes
+app.use('/api/users', users);
+app.use('/api/profile', profile);
+app.use('/api/reviews', reviews);
+app.use('/api/messages', messages);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // Set Static folder
   app.use(express.static('./client/public'));
 
-  // app.get('*', (req, res) => {
-  //   res.sendFile(path.join(__dirname, './client/public/index.html'), err => {
-  //     if (err) {
-  //       res.status(500).send(err);
-  //     }
-  //   });
-  // });
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './client/public/index.html'), err => {
+      if (err) {
+        res.status(500).send(err);
+      }
+    });
+  });
 } else {
   // serve static files
   app.use('/', express.static(path.join(__dirname, './client/public')));
 
-  // app.get('*', (req, res) => {
-  //   res.sendFile(path.join(__dirname, './client/public/index.html'), err => {
-  //     if (err) {
-  //       res.status(500).send(err);
-  //     }
-  //   });
-  // });
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './client/public/index.html'), err => {
+      if (err) {
+        res.status(500).send(err);
+      }
+    });
+  });
 }
-
-// Use Routes
-app.use('/api/users', users);
-app.use('/api/profile', profile);
-app.use('/api/reviews', reviews);
-app.use('/api/messages', messages);
 
 app.listen(port, () =>
   console.log(
