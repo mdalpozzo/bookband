@@ -7,6 +7,7 @@ const passport = require('passport');
 
 //load input validation
 const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 // Load User Models
 const ArtistUser = require('../../models/ArtistUser');
@@ -33,7 +34,8 @@ router.post('/register_artist', (req, res) => {
   ArtistUser.findOne({ email: req.body.email })
     .then(user => {
       if(user) {
-        return res.status(400).json({email: 'An artist account is already registered with this email.'});
+        errors.email = 'An artist account is already registered with this email.';
+        return res.status(400).json(errors);
       } else {
         const newUser = new ArtistUser({
           name: req.body.name,
@@ -72,7 +74,8 @@ router.post('/register_host', (req, res) => {
   HostUser.findOne({ email: req.body.email })
     .then(user => {
       if(user) {
-        return res.status(400).json({email: 'A host account is already registered with this email.'});
+        errors.email = 'A host account is already registered with this email.';
+        return res.status(400).json(errors);
       } else {
         const newUser = new HostUser({
           name: req.body.name,
@@ -98,6 +101,13 @@ router.post('/register_host', (req, res) => {
 // @desc    Login an artist user
 // @access  Public
 router.post('/login_artist', (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  //check validation
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -106,7 +116,8 @@ router.post('/login_artist', (req, res) => {
     .then(user => {
       //check for user
       if(!user) {
-        return res.status(404).json({email: 'An artist user account is not found with this email'});
+        errors.email = 'An artist user account is not found with this email';
+        return res.status(404).json(errors);
       }
 
       //check password
@@ -129,7 +140,8 @@ router.post('/login_artist', (req, res) => {
                 })
             });
           } else {
-            return res.status(400).json({password: 'Password incorrect'});
+            errors.password = 'Password incorrect';
+            return res.status(400).json(errors);
           }
         })
     })
@@ -139,6 +151,13 @@ router.post('/login_artist', (req, res) => {
 // @desc    Login a host user
 // @access  Public
 router.post('/login_host', (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  //check validation
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -147,7 +166,8 @@ router.post('/login_host', (req, res) => {
     .then(user => {
       //check for user
       if(!user) {
-        return res.status(404).json({email: 'A host user account not found with this email'});
+        errors.email = 'A Host user account is not found with this email';
+        return res.status(404).json(errors);
       }
 
       //check password
@@ -170,7 +190,8 @@ router.post('/login_host', (req, res) => {
                 })
             });
           } else {
-            return res.status(400).json({password: 'Password incorrect'});
+            errors.password = 'Password incorrect';
+            return res.status(400).json(errors);
           }
         })
     })
