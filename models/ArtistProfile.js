@@ -71,3 +71,5 @@ const ArtistProfileSchema = new Schema({
     default: Date.now,
   },
 })
+
+module.export = ArtistProfile = mongoose.model('artistprofile', ArtistProfileSchema);
