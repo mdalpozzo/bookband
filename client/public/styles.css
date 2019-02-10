@@ -1,0 +1,396 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.mainpic {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: -1;
+}
+@media (max-width: 500px) {
+  .mainpic {
+    width: 20rem;
+  }
+}
+
+.leads {
+  color: #ffffff;
+  margin-top: 10rem;
+}
+
+/* navbar ============================================================================*/
+.navbar-container {
+  background: #3B5B98;
+  width: 100%;
+  height: 50px;
+  color: #b3b3b3;
+  overflow: visible;
+  box-shadow: 0 0.5px 20px 0.5px #222222;
+  z-index: 1;
+  text-align: center;
+}
+@media (min-width: 500px) {
+  .navbar-container nav {
+    content: normal;
+  }
+  .navbar-container ul.menu {
+    content: normal;
+  }
+  .navbar-container li {
+    display: inline;
+    padding: 0 5px 0 5px;
+    margin: 0 1rem 0 1rem;
+  }
+  .navbar-container .button {
+    visibility: hidden;
+  }
+}
+.navbar-container h1 {
+  font-size: 12px;
+  width: 5rem;
+  margin: 9px 0 0 5px;
+  text-align: left;
+  position: absolute;
+}
+
+.navlink {
+  color: #b3b3b3;
+  text-decoration: none;
+  display: inline;
+}
+@media (max-width: 500px) {
+  .navlink {
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+}
+
+.namelink {
+  color: #b3b3b3;
+}
+
+.navlink:hover {
+  color: #e88224;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* MENU ANIMATION ----------- */
+@media (max-width: 500px) {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul li {
+    cursor: pointer;
+    padding: 6px 20px;
+    font-size: 48px;
+  }
+
+  .button {
+    opacity: 0.6;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+    border: none;
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+    float: right;
+    outline: none;
+    transition: opacity 0.1s ease-out;
+  }
+  .button:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 100%;
+    background-image: url("images/menuicon.png");
+    background-size: cover;
+    background-position: center;
+  }
+  .button:after {
+    opacity: 0;
+    content: "×";
+    color: white;
+    position: absolute;
+    top: 27px;
+    left: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 76px;
+    line-height: 0;
+    transition: opacity 0.4s ease-out;
+  }
+  .button:active {
+    transform: translateY(2px);
+  }
+  .button:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  .open .button {
+    opacity: 1;
+  }
+  .open .button:before {
+    opacity: 0;
+    width: 0;
+  }
+  .open .button:after {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(360deg);
+    transition: transform 0.2s 0.2s ease-out, opacity 0.2s 0.2s ease-out;
+  }
+
+  nav {
+    z-index: 1;
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    overflow: hidden;
+  }
+  nav:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: rgba(201, 154, 92, 0.98);
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    border-radius: 100%;
+    transform: scale(0.04), translateY(9999px);
+    overflow: hidden;
+  }
+  .open nav {
+    top: 0;
+  }
+  .open nav:before {
+    animation: menu-animation 0.5s ease-out forwards;
+  }
+
+  ul.menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    color: black;
+  }
+  ul.menu li {
+    opacity: 0;
+    text-align: center;
+    transform: translate3d(0, 36px, 0);
+  }
+  .open ul.menu li {
+    color: #000000;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  }
+  .open ul.menu li:nth-child(1) {
+    transition-delay: 0.15s;
+  }
+  .open ul.menu li:nth-child(2) {
+    transition-delay: 0.25s;
+  }
+  .open ul.menu li:nth-child(3) {
+    transition-delay: 0.35s;
+  }
+  .open ul.menu li:nth-child(4) {
+    transition-delay: 0.45s;
+  }
+
+  .landing {
+    transition: 0.2s ease-out;
+  }
+  .open .landing {
+    transform: scale(0.92);
+    transition: transform 0.2s 0.21s ease-out;
+  }
+
+  @keyframes menu-animation {
+    0% {
+      opacity: 0;
+      transform: scale(0.04) translateY(300%);
+    }
+    40% {
+      transform: scale(0.04) translateY(0);
+      transition: ease-out;
+    }
+    40% {
+      transform: scale(0.04) translateY(0);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(0.02) translateY(0px);
+    }
+    61% {
+      transform: scale(0.04);
+    }
+    99.9% {
+      height: 0;
+      padding-bottom: 100%;
+      border-radius: 100%;
+    }
+    100% {
+      transform: scale(2);
+      height: 100%;
+      padding-bottom: 0;
+      border-radius: 0;
+    }
+  }
+}
+/* ---- */
+
+/*# sourceMappingURL=styles.css.map */

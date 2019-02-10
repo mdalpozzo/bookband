@@ -1,0 +1,12 @@
+node_modules/
+config/keys_dev.js
+yarn-error.log
+.eslintrc
+.yarn-error.log
+npm-debug.log
+.DS_Store
+.env
+.vscode/
+seedmlab.js
+client/public/bundle.js
+package-lock.json
