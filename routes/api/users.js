@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 
+//load input validation
+const validateRegisterInput = require('../../validation/register');
+
 // Load User Models
 const ArtistUser = require('../../models/ArtistUser');
 const HostUser = require('../../models//HostUser');
@@ -20,6 +23,13 @@ router.get('/test', (req, res) => {
 // @desc    Registers an artist users
 // @access  Public
 router.post('/register_artist', (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  //check validation
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
+
   ArtistUser.findOne({ email: req.body.email })
     .then(user => {
       if(user) {
@@ -52,6 +62,13 @@ router.post('/register_artist', (req, res) => {
 // @desc    Registers a host users
 // @access  Public
 router.post('/register_host', (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+    //check validation
+    if(!isValid) {
+      return res.status(400).json(errors);
+    }
+
   HostUser.findOne({ email: req.body.email })
     .then(user => {
       if(user) {
