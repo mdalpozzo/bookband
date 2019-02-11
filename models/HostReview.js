@@ -15,11 +15,15 @@ const ReviewerSchema = new Schema({
 });
 
 const HostReviewSchema = new Schema({
+  reviewType: {
+    type: String,
+    required: true,
+  },
   profile: {
     type: Schema.Types.ObjectId,
     ref: 'hostprofile',
   },
-  reviewer: [ReviewerSchema],
+  reviewer: ReviewerSchema,
   title: {
     type: String,
     max: 40,

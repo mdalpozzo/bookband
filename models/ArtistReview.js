@@ -15,11 +15,15 @@ const ReviewerSchema = new Schema({
 });
 
 const ArtistReviewSchema = new Schema({
+  reviewType: {
+    type: String,
+    required: true,
+  },
   profile_id: {
     type: Schema.Types.ObjectId,
     ref: 'artistprofile',
   },
-  reviewer: [ReviewerSchema],
+  reviewer: ReviewerSchema,
   title: {
     type: String,
     max: 40,

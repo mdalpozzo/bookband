@@ -62,9 +62,10 @@ router.post('/', passport.authenticate('jwt', { session: false }),  (req, res) =
     }
 
     const newReview = new ArtistReview({
+      reviewType: 'artist',
       profile_id: req.body.profile_id,
       reviewer: {
-        reviewerName: req.user.reviewerName,
+        reviewerName: req.body.reviewerName,
         user_id: req.user.id,
         userType: req.user.userType,
       },
@@ -85,9 +86,10 @@ router.post('/', passport.authenticate('jwt', { session: false }),  (req, res) =
     }
 
     const newReview = new HostReview({
+      reviewType: 'host',
       profile_id: req.body.profile_id,
       reviewer: {
-        reviewerName: req.user.reviewerName,
+        reviewerName: req.body.reviewerName,
         user_id: req.user.id,
         userType: req.user.userType,
       },
@@ -102,6 +104,42 @@ router.post('/', passport.authenticate('jwt', { session: false }),  (req, res) =
   } else {
     return res.status(400).json('there is an issue with profileType');
   }
+});
+
+// @route   DELETE api/reviews/:id
+// @desc    Delete review
+// @access  Private
+router.delete(
+  '/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    if (req.body.reviewType === 'artist') {
+      ArtistReview.findById(req.params.id)
+        .then(review => {
+          //check if owner of review
+          if (review.reviewer.user_id.toString() !== req.user.id.toString()) {
+            return res.status(401).json({ notauthorized: 'User not authorized. This is not your post!' });
+          }
+
+          //delete
+          review.remove().then(() => res.json({ success: true }));
+        })
+        .catch(err => res.status(404).json({ reviewnotfound: 'No review found'}))
+
+    } else if (req.body.reviewType === 'host') {
+      HostReview.findById(req.params.id)
+        .then(review => {
+          //check if owner of review
+          if (review.reviewer.user_id !== req.user.id) {
+            return res.status(401).json({ notauthorized: 'User not authorized. This is not your post!' });
+          }
+
+          //delete
+          review.remove().then(() => res.json({ success: true }));
+        })
+        .catch(err => res.status(404).json({ reviewnotfound: 'No review found'}))
+
+    } else {
+      return res.status(400).json('there is an issue with reviewType');
+    }
 });
 
 module.exports = router;
