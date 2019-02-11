@@ -76,4 +76,4 @@ const HostProfileSchema = new Schema({
   },
 })
 
-module.export = HostProfile = mongoose.model('hostprofile', HostProfileSchema);
+module.exports = HostProfile = mongoose.model('hostprofile', HostProfileSchema);
