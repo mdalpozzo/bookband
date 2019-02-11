@@ -55,6 +55,109 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
   }
 });
 
+// @route   GET api/profile/artist/handle/:handle
+// @desc    Get artist profile by handle
+// @access  Public
+router.get('/artist/handle/:handle', (req, res) => {
+  ArtistProfile.findOne({ handle: req.params.handle })
+    .populate('user', 'name')
+    .then(profile => {
+      if(!profile) {
+        errors.noprofile = 'There is no profile for this artist';
+        res.status(404).json(errors);
+      }
+
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
+// @route   GET api/profile/host/handle/:handle
+// @desc    Get host profile by handle
+// @access  Public
+router.get('/host/handle/:handle', (req, res) => {
+  HostProfile.findOne({ handle: req.params.handle })
+    .populate('user', 'name')
+    .then(profile => {
+      if(!profile) {
+        errors.noprofile = 'There is no profile for this host';
+        res.status(404).json(errors);
+      }
+
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
+// @route   GET api/profile/artist/user/:user_id
+// @desc    Get artist profile by user ID
+// @access  Public
+router.get('/artist/user/:user_id', (req, res) => {
+  ArtistProfile.findOne({ user: req.params.user_id })
+    .populate('user', 'name')
+    .then(profile => {
+      if(!profile) {
+        errors.noprofile = 'There is no artist profile for this user';
+        res.status(404).json(errors);
+      }
+
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json({profile: 'There is no artist profile for this user'}));
+});
+
+// @route   GET api/profile/host/user/:user_id
+// @desc    Get host profile by user ID
+// @access  Public
+router.get('/host/user/:user_id', (req, res) => {
+  HostProfile.findOne({ user: req.params.user_id })
+    .populate('user', 'name')
+    .then(profile => {
+      if(!profile) {
+        errors.noprofile = 'There is no host profile for this user';
+        res.status(404).json(errors);
+      }
+
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json({profile: 'There is no host profile for this user'}));
+});
+
+// @route GET api/profile/artist/all
+// @desc    Get all artist profiles
+// @access  Public
+router.get('/artist/all', (req, res) => {
+  const errors = {};
+
+  ArtistProfile.find()
+    .populate('user', 'name')
+    .then(profiles => {
+      if(profiles.length === 0) {
+        errors.noprofile = 'There are no artist profiles';
+        return res.status(404).json();
+      }
+      res.json(profiles);
+    })
+    .catch(err => res.status(404).json({ profile: 'There are no artist profiles' }));
+});
+
+// @route GET api/profile/host/all
+// @desc    Get all host profiles
+// @access  Public
+router.get('/host/all', (req, res) => {
+  HostProfile.find()
+    .populate('user', 'name')
+    .then(profiles => {
+      if(profiles.length === 0) {
+        errors.noprofile = 'There are no host profiles';
+        return res.status(404).json();
+      }
+      res.json(profiles);
+    })
+    .catch(err => res.status(404).json({ profile: 'There are no host profiles'}));
+});
+
+
 // @route   POST api/profile/
 // @desc    Create or edit user profile
 // @access  Private
