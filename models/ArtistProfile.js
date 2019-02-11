@@ -72,4 +72,4 @@ const ArtistProfileSchema = new Schema({
   },
 })
 
-module.export = ArtistProfile = mongoose.model('artistprofile', ArtistProfileSchema);
+module.exports = ArtistProfile = mongoose.model('artistprofile', ArtistProfileSchema);
