@@ -25,4 +25,4 @@ const HostUserSchema = new Schema({
   }
 })
 
-module.exports = HostUser = mongoose.model('hostusers', HostUserSchema);
+module.exports = HostUser = mongoose.model('hostuser', HostUserSchema);

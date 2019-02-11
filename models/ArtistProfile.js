@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ArtistProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'artistusers',
+    ref: 'artistuser',
   },
   handle: {
     type: String,

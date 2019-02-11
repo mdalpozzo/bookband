@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const HostProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'hostusers',
+    ref: 'hostuser',
   },
   handle: {
     type: String,

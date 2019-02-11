@@ -30,6 +30,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 
   if (req.user.userType === 'artist') {
     ArtistProfile.findOne({ user: req.user.id })
+      .populate('user', 'name')
       .then(profile => {
         if(!profile) {
           errors.noprofile = 'There is no profile for this artist user';
@@ -40,6 +41,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
       .catch(err => res.status(404).json(err));
   } else if ( req.user.userType === 'host') {
     HostProfile.findOne({ user: req.user.id })
+      .populate('user', 'name')
       .then(profile => {
         if(!profile) {
           errors.noprofile = 'There is no profile for this host user'
@@ -119,7 +121,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
               }
 
               // save profile
-              new ArtistProfile(profileFields.save().then(profile => res.json(profile)));
+              new ArtistProfile(profileFields).save().then(profile => res.json(profile));
             })
         }
       });
