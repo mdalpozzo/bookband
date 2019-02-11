@@ -132,7 +132,7 @@ router.get('/host/user/:user_id', (req, res) => {
     .catch(err => res.status(404).json(errors));
 });
 
-// @route GET api/profile/artist/all
+// @route   GET api/profile/artist/all
 // @desc    Get all artist profiles
 // @access  Public
 router.get('/artist/all', (req, res) => {
@@ -150,7 +150,7 @@ router.get('/artist/all', (req, res) => {
     .catch(err => res.status(404).json({ profile: 'There are no artist profiles' }));
 });
 
-// @route GET api/profile/host/all
+// @route   GET api/profile/host/all
 // @desc    Get all host profiles
 // @access  Public
 router.get('/host/all', (req, res) => {
