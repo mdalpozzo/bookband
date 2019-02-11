@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const VideoSchema = new Schema({
+    url: {
+      type: String,
+    },
+})
+
 const ArtistProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -40,9 +46,7 @@ const ArtistProfileSchema = new Schema({
       type: String,
     },
   },
-  videos: {
-    type: [String],
-  },
+  videos: [VideoSchema],
   bio: {
     type: String,
   },
