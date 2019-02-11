@@ -2,9 +2,9 @@
 An exchange for musical artists and venues
 
 
-#API Routes
+# API Routes
 
-#USER ROUTES
+# USER ROUTES
 @route   POST api/users/register_artist
 @desc    Registers an artist users
 @access  Public
@@ -25,7 +25,7 @@ An exchange for musical artists and venues
 @desc    Return current user
 @access  Private
 
-#PROFILE ROUTES
+# PROFILE ROUTES
 @route   GET api/profile
 @desc    Get current users profile
 @access  Private
@@ -70,7 +70,7 @@ An exchange for musical artists and venues
 @desc    Delete user and profile
 @access  Private
 
-#REVIEW ROUTES
+# REVIEW ROUTES
 @route   GET api/reviews/profile/:profile_id
 @desc    Gets all reviews by profile_id
 @access  Public
