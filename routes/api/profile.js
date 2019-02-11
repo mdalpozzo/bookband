@@ -3,6 +3,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 
+//load validation
+const validateArtistProfileInput = require('../../validation/artist-profile');
+const validateHostProfileInput = require('../../validation/host-profile');
+
 //load profile models
 const ArtistProfile = require('../../models/ArtistProfile');
 const HostProfile = require('../../models/HostProfile');
@@ -50,15 +54,22 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 });
 
 // @route   POST api/profile/
-// @desc    Create user profile
+// @desc    Create or edit user profile
 // @access  Private
-router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-  const errors = {};
-
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   // get fields
   const profileFields = {};
   profileFields.user = req.user.id;
   if (req.user.userType === 'artist') {
+    const { errors, isValid } = validateArtistProfileInput(req.body);
+
+    //check validation
+    if(!isValid) {
+      //return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+    
+    //fill profile fields object
     if(req.body.handle) profileFields.handle = req.body.handle;
     if(typeof req.body.website !== 'undefined') {
       profileFields.website = req.body.website.split(',');
@@ -114,6 +125,15 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
       });
 
   } else if (req.user.userType === 'host') {
+    const { errors, isValid } = validateHostProfileInput(req.body);
+
+    //check validation
+    if(!isValid) {
+      //return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    //fill profileFields object
     if(req.body.handle) profileFields.handle = req.body.handle;
     if(typeof req.body.website !== 'undefined') {
       profileFields.website = req.body.website.split(',');
