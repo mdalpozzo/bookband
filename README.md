@@ -5,11 +5,11 @@ An exchange for musical artists and venues
 # API Routes
 
 # USER ROUTES
-@route   POST api/users/register_artist,
+route:   POST api/users/register_artist
 
-@desc    Registers an artist users,
+Registers an artist user
 
-@access  Public,
+access:  Public
 
 @route   POST api/users/register_host
 @desc    Registers a host users
