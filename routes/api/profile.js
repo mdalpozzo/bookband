@@ -31,7 +31,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 
   if (req.user.userType === 'artist') {
     ArtistProfile.findOne({ user: req.user.id })
-      .populate('user', 'name')
+      .populate('user', ['name', 'userType'])
       .then(profile => {
         if(!profile) {
           errors.noprofile = 'There is no profile for this artist user';
@@ -42,7 +42,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
       .catch(err => res.status(404).json(err));
   } else if ( req.user.userType === 'host') {
     HostProfile.findOne({ user: req.user.id })
-      .populate('user', 'name')
+      .populate('user', ['name', 'userType'])
       .then(profile => {
         if(!profile) {
           errors.noprofile = 'There is no profile for this host user'
@@ -60,8 +60,10 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 // @desc    Get artist profile by handle
 // @access  Public
 router.get('/artist/handle/:handle', (req, res) => {
+  const errors = {};
+
   ArtistProfile.findOne({ handle: req.params.handle })
-    .populate('user', 'name')
+    .populate('user', ['name', 'userType'])
     .then(profile => {
       if(!profile) {
         errors.noprofile = 'There is no profile for this artist';
@@ -70,15 +72,17 @@ router.get('/artist/handle/:handle', (req, res) => {
 
       res.json(profile);
     })
-    .catch(err => res.status(404).json(err));
+    .catch(err => res.status(404).json(errors));
 });
 
 // @route   GET api/profile/host/handle/:handle
 // @desc    Get host profile by handle
 // @access  Public
 router.get('/host/handle/:handle', (req, res) => {
+  const errors = {};
+
   HostProfile.findOne({ handle: req.params.handle })
-    .populate('user', 'name')
+    .populate('user', ['name', 'userType'])
     .then(profile => {
       if(!profile) {
         errors.noprofile = 'There is no profile for this host';
@@ -87,15 +91,17 @@ router.get('/host/handle/:handle', (req, res) => {
 
       res.json(profile);
     })
-    .catch(err => res.status(404).json(err));
+    .catch(err => res.status(404).json(errors));
 });
 
 // @route   GET api/profile/artist/user/:user_id
 // @desc    Get artist profile by user ID
 // @access  Public
 router.get('/artist/user/:user_id', (req, res) => {
+  const errors = {};
+
   ArtistProfile.findOne({ user: req.params.user_id })
-    .populate('user', 'name')
+    .populate('user', ['name', 'userType'])
     .then(profile => {
       if(!profile) {
         errors.noprofile = 'There is no artist profile for this user';
@@ -104,15 +110,17 @@ router.get('/artist/user/:user_id', (req, res) => {
 
       res.json(profile);
     })
-    .catch(err => res.status(404).json({profile: 'There is no artist profile for this user'}));
+    .catch(err => res.status(404).json(errors));
 });
 
 // @route   GET api/profile/host/user/:user_id
 // @desc    Get host profile by user ID
 // @access  Public
 router.get('/host/user/:user_id', (req, res) => {
+  const errors = {};
+
   HostProfile.findOne({ user: req.params.user_id })
-    .populate('user', 'name')
+    .populate('user', ['name', 'userType'])
     .then(profile => {
       if(!profile) {
         errors.noprofile = 'There is no host profile for this user';
@@ -121,7 +129,7 @@ router.get('/host/user/:user_id', (req, res) => {
 
       res.json(profile);
     })
-    .catch(err => res.status(404).json({profile: 'There is no host profile for this user'}));
+    .catch(err => res.status(404).json(errors));
 });
 
 // @route GET api/profile/artist/all
@@ -131,11 +139,11 @@ router.get('/artist/all', (req, res) => {
   const errors = {};
 
   ArtistProfile.find()
-    .populate('user', 'name')
+    .populate('user', ['name', 'userType'])
     .then(profiles => {
       if(profiles.length === 0) {
         errors.noprofile = 'There are no artist profiles';
-        return res.status(404).json();
+        return res.status(404).json(errors);
       }
       res.json(profiles);
     })
@@ -146,12 +154,14 @@ router.get('/artist/all', (req, res) => {
 // @desc    Get all host profiles
 // @access  Public
 router.get('/host/all', (req, res) => {
+  const errors = {};
+
   HostProfile.find()
-    .populate('user', 'name')
+    .populate('user', ['name', 'userType'])
     .then(profiles => {
       if(profiles.length === 0) {
         errors.noprofile = 'There are no host profiles';
-        return res.status(404).json();
+        return res.status(404).json(errors);
       }
       res.json(profiles);
     })
