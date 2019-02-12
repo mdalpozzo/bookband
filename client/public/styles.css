@@ -142,6 +142,17 @@ html {
   height: 100%;
   width: 100%;
   position: relative;
+  overflow: hidden;
+}
+@media (max-width: 500px) {
+  .banner {
+    height: 350px;
+  }
+}
+@media (min-width: 500px) {
+  .banner {
+    height: 350px;
+  }
 }
 @media (min-width: 700px) {
   .banner {
@@ -193,6 +204,9 @@ html {
   color: #ffffff;
   width: 100%;
   height: 15rem;
+  position: absolute;
+  left: 0;
+  transition: left 0.4s;
 }
 @media (max-width: 500px) {
   .artistorhost {
@@ -214,7 +228,7 @@ html {
   padding: 0 15px;
 }
 .artistorhost #artist p, .artistorhost #host p {
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 @media (max-width: 500px) {
   .artistorhost #artist p, .artistorhost #host p {
@@ -223,7 +237,7 @@ html {
 }
 @media (min-width: 700px) {
   .artistorhost #artist p, .artistorhost #host p {
-    margin-top: 4rem;
+    margin-top: 1rem;
   }
 }
 .artistorhost #artist button, .artistorhost #host button {
@@ -262,6 +276,44 @@ html {
 .artistorhost #artist button:active, .artistorhost #host button:active {
   position: relative;
   top: 1px;
+}
+
+.hide-banner-left {
+  left: -100%;
+}
+
+.hide-banner-right {
+  left: 100%;
+}
+
+.artist-reg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  transition: left 0.4s;
+  text-align: center;
+}
+
+.hide-artist-reg {
+  left: -100%;
+}
+
+.host-reg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  transition: right 0.4s;
+  text-align: center;
+}
+
+.hide-host-reg {
+  right: -100%;
+}
+
+.main-input {
+  margin: auto;
 }
 
 /* navbar ============================================================================*/
@@ -310,8 +362,58 @@ html {
   position: absolute;
 }
 
-.hide {
+.hide-nav {
   top: -50px;
+}
+
+.text-field {
+  display: inline-block;
+  margin: 0 3px;
+}
+
+.login-form-container {
+  display: inline-block;
+  position: absolute;
+  right: 2rem;
+  top: 0.65rem;
+}
+
+.login-form {
+  display: flex;
+}
+.login-form .login-button {
+  padding: 0;
+  width: 4rem;
+  color: #ffffff;
+}
+
+.login-button {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5d87cf), color-stop(1, #1e66bd));
+  background: -moz-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
+  background: -webkit-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
+  background: -o-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
+  background: -ms-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
+  background: linear-gradient(to bottom, #5d87cf 5%, #1e66bd 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5d87cf", endColorstr="#1e66bd",GradientType=0);
+  background-color: #5d87cf;
+  height: 30px;
+  font-size: 12px;
+}
+
+.login-button:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #1e66bd), color-stop(1, #5d87cf));
+  background: -moz-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
+  background: -webkit-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
+  background: -o-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
+  background: -ms-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
+  background: linear-gradient(to bottom, #1e66bd 5%, #5d87cf 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e66bd", endColorstr="#5d87cf",GradientType=0);
+  background-color: #1e66bd;
+}
+
+.login-button:active {
+  position: relative;
+  top: 1px;
 }
 
 .navlink {
