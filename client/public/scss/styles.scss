@@ -351,7 +351,8 @@ $colors: (
 .navbar-container {
   background:map-get($colors, accent);
   width: 100%;
-  height: 50px;
+  height: 65px;
+  padding-top: 20px;
   top: 0;
   color: map-get($colors, navbar-font);
   // border-bottom: 1px solid #000000;
@@ -362,14 +363,14 @@ $colors: (
   text-align: center;
   transition: top .3s;
   position: fixed;
-  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #285ba8), color-stop(1, #1c4f85));
-	background:-moz-linear-gradient(top, #285ba8 5%, #1c4f85 100%);
-	background:-webkit-linear-gradient(top, #285ba8 5%, #1c4f85 100%);
-	background:-o-linear-gradient(top, #285ba8 5%, #1c4f85 100%);
-	background:-ms-linear-gradient(top, #285ba8 5%, #1c4f85 100%);
-	background:linear-gradient(to bottom, #285ba8 5%, #1c4f85 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#285ba8', endColorstr='#1c4f85',GradientType=0);
-	background-color:#285ba8;
+  background: rgba(0,92,179,1);
+  background: -moz-linear-gradient(top, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,92,179,1)), color-stop(100%, rgba(0,82,163,0.18)));
+  background: -webkit-linear-gradient(top, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
+  background: -o-linear-gradient(top, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
+  background: -ms-linear-gradient(top, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
+  background: linear-gradient(to bottom, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005cb3', endColorstr='#0052a3', GradientType=0 );
   
   @include for-tablet-portrait-up {
     nav {
@@ -402,7 +403,7 @@ $colors: (
 }
 
 .hide-nav {
-  top: -50px
+  top: -55px
 }
 
 .text-field {
@@ -414,7 +415,7 @@ $colors: (
   display: inline-block;
   position: absolute;
   right: 2rem;
-  top: .65rem;
+  top: .8rem;
 
 }
 .login-form {
