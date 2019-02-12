@@ -330,13 +330,13 @@ html {
   text-align: center;
   transition: top 0.3s;
   position: fixed;
-  background: #005cb3;
-  background: -moz-linear-gradient(top, #005cb3 0%, rgba(0, 82, 163, 0.18) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #005cb3), color-stop(100%, rgba(0, 82, 163, 0.18)));
-  background: -webkit-linear-gradient(top, #005cb3 0%, rgba(0, 82, 163, 0.18) 100%);
-  background: -o-linear-gradient(top, #005cb3 0%, rgba(0, 82, 163, 0.18) 100%);
-  background: -ms-linear-gradient(top, #005cb3 0%, rgba(0, 82, 163, 0.18) 100%);
-  background: linear-gradient(to bottom, #005cb3 0%, rgba(0, 82, 163, 0.18) 100%);
+  background: rgba(0, 92, 179, 0.93);
+  background: -moz-linear-gradient(top, rgba(0, 92, 179, 0.93) 0%, rgba(0, 82, 163, 0.18) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0, 92, 179, 0.93)), color-stop(100%, rgba(0, 82, 163, 0.18)));
+  background: -webkit-linear-gradient(top, rgba(0, 92, 179, 0.93) 0%, rgba(0, 82, 163, 0.18) 100%);
+  background: -o-linear-gradient(top, rgba(0, 92, 179, 0.93) 0%, rgba(0, 82, 163, 0.18) 100%);
+  background: -ms-linear-gradient(top, rgba(0, 92, 179, 0.93) 0%, rgba(0, 82, 163, 0.18) 100%);
+  background: linear-gradient(to bottom, rgba(0, 92, 179, 0.93) 0%, rgba(0, 82, 163, 0.18) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#005cb3", endColorstr="#0052a3", GradientType=0 );
 }
 @media (min-width: 500px) {

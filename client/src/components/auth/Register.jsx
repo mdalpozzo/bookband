@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
-// import { registerUser } from '../../actions/authActions';
+import { registerUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup.jsx';
 import SelectListGroup from '../common/SelectListGroup.jsx';
 
@@ -37,18 +37,18 @@ class Register extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  // onSubmit = e => {
-  //   e.preventDefault();
+  onSubmit = e => {
+    e.preventDefault();
 
-  //   const newUser = {
-  //     name: this.state.name,
-  //     email: this.state.email,
-  //     password: this.state.password,
-  //     password2: this.state.password2,
-  //   };
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2,
+    };
 
-  //   this.props.registerUser(newUser, this.props.history);
-  // };
+    this.props.registerUser(newUser, this.props.history);
+  };
 
   render() {
     const { errors } = this.state;
@@ -109,7 +109,8 @@ class Register extends Component {
                   <SelectListGroup
                   placeholder="userType"
                   name="userType"
-                  value={this.props.regType}
+                  // value={this.props.regType}
+                  defaultValue={this.props.regType}
                   options={options}
                   error={errors.userType}
                   info="Are you an artist/performer or a host/vendor?"
@@ -126,13 +127,13 @@ class Register extends Component {
   }
 }
 
-// Register.propTypes = {
-//   registerUser: PropTypes.func.isRequired,
-//   auth: PropTypes.shape({
-//     isAuthenticated: PropTypes.bool.isRequired,
-//   }).isRequired,
-//   // errors: PropTypes.object.isRequired,
-// };
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+  }).isRequired,
+  errors: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -142,7 +143,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      // registerUser,
+      registerUser,
     },
     dispatch
   );

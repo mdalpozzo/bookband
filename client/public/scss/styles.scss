@@ -362,14 +362,14 @@ $colors: (
   z-index: 1;
   text-align: center;
   transition: top .3s;
-  position: fixed;
-  background: rgba(0,92,179,1);
-  background: -moz-linear-gradient(top, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,92,179,1)), color-stop(100%, rgba(0,82,163,0.18)));
-  background: -webkit-linear-gradient(top, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
-  background: -o-linear-gradient(top, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
-  background: -ms-linear-gradient(top, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
-  background: linear-gradient(to bottom, rgba(0,92,179,1) 0%, rgba(0,82,163,0.18) 100%);
+  position: fixed;  
+  background: rgba(0,92,179,0.93);
+  background: -moz-linear-gradient(top, rgba(0,92,179,0.93) 0%, rgba(0,82,163,0.18) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,92,179,0.93)), color-stop(100%, rgba(0,82,163,0.18)));
+  background: -webkit-linear-gradient(top, rgba(0,92,179,0.93) 0%, rgba(0,82,163,0.18) 100%);
+  background: -o-linear-gradient(top, rgba(0,92,179,0.93) 0%, rgba(0,82,163,0.18) 100%);
+  background: -ms-linear-gradient(top, rgba(0,92,179,0.93) 0%, rgba(0,82,163,0.18) 100%);
+  background: linear-gradient(to bottom, rgba(0,92,179,0.93) 0%, rgba(0,82,163,0.18) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005cb3', endColorstr='#0052a3', GradientType=0 );
   
   @include for-tablet-portrait-up {
