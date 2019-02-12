@@ -9,8 +9,20 @@ class NavBar extends Component {
     super();
     this.state = {
       active: false,
+      isHide: false,
     };
   }
+
+  hideBar = () => {
+    const { isHide } = this.state
+
+    window.scrollY > this.prev ?
+    !isHide && this.setState({ isHide: true })
+    :
+    isHide && this.setState({ isHide: false });
+
+    this.prev = window.scrollY;
+ }
 
   onClick = e => {
     if (document.body.className !== 'open') {
@@ -20,9 +32,19 @@ class NavBar extends Component {
     }
   };
 
+  componentDidMount(){
+    window.addEventListener('scroll', this.hideBar);
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this.hideBar);
+  }
+
   render() {
+    const classHide = this.state.isHide ? 'hide' : '';
+
     return (
-      <div className="navbar-container">
+      <div className={`navbar-container ${classHide}`}>
         <div>
           <h1>
             <Link className="namelink" to="/">

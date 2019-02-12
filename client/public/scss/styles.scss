@@ -154,6 +154,11 @@ table {
   }
 }
 
+html {
+  height: 100%;
+}
+
+
 $colors: (
   primary: #fffafb,
   accent: 	#3B5B98,
@@ -162,54 +167,139 @@ $colors: (
   backgrounds: #b4d7ff,
 );
 
+.banner {
+  height: 100%;
+  width: 100%;
+  // overflow: hidden;
+  position: relative;
+  @include for-phone-only {
+    // height: 600px;
+  }
+  @include for-tablet-landscape-up {
+    height: 350px;
+  }
+}
+
+.about-banner {
+  height: 600px;
+}
+
+.parallax-mainpage {
+  height: 400px;
+  background-color: #00000073;
+}
+
 .mainpic {
   position: absolute;
   width: 100%;
   top: 0;
+  left: -10rem;
   z-index: -1;
   @include for-phone-only {
-    width: 20rem;
+    width: 50rem;
+  }
+  @include for-tablet-portrait-up {
+    width: 120rem;
+  }
+  @include for-tablet-landscape-up {
+    width: 100%;
   }
 }
 
 .leads {
   color: #ffffff;
-  margin-top: 10rem;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5rem;
+
+  @include for-phone-only {
+    // margin-top: 1rem;
+  }
+  @include for-tablet-portrait-up {
+    // margin-top: 5rem;
+  }
+  @include for-tablet-landscape-up {
+    // margin-top: 5rem;
+  }
+}
+
+.artistorhost {
+  color: #ffffff;
+  width: 100%;
+  height: 15rem;
+  // margin-top: 5rem;
+  @include for-phone-only {
+    height: 10rem;
+  }
+  @include for-tablet-landscape-up {
+    height: 15rem;
+  }
+
+  #artist, #host {
+    width: 45%;
+    margin: 2% 1.5%;
+    height: 80%;
+    text-align: center;
+    background-color: #44444488;
+    float: left;
+    padding: 0 15px;
+
+    p {
+      margin-top: 4rem;
+      @include for-phone-only {
+        margin-top: 1rem;
+      }
+      @include for-tablet-landscape-up {
+        margin-top: 4rem;
+      }
+    }
+
+    button {
+      margin: 0 5px;
+    }
+  }
 }
 
 /* navbar ============================================================================*/
+
 .navbar-container {
   background:map-get($colors, accent);
   width: 100%;
   height: 50px;
+  top: 0;
   color: map-get($colors, navbar-font);
   // border-bottom: 1px solid #000000;
   overflow: visible;
-  box-shadow: 0 .5px 20px .5px rgb(34, 34, 34);
+  // box-shadow: 0 .5px 20px .5px rgb(34, 34, 34);
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.2);
   z-index: 1;
   text-align: center;
-
+  transition: top .3s;
+  position: fixed;
+  
   @include for-tablet-portrait-up {
     nav {
       content: normal;
       // margin-top: 25px;
     }
-
+    
     ul.menu {
       content: normal;
     }
-
+    
     li {
       display: inline;
       padding: 0 5px 0 5px;
       margin: 0 1rem 0 1rem;
     }
-
+    
     .button {
       visibility: hidden;
     }
   }
-
+  
   h1 {
     font-size: 12px;
     width: 5rem;
@@ -217,6 +307,10 @@ $colors: (
     text-align: left;
     position: absolute;
   }
+}
+
+.hide {
+  top: -50px
 }
 
 .navlink {
@@ -450,3 +544,4 @@ ul {
   }
 }
 /* ---- */
+
