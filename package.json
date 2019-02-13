@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-dev": "cd client && webpack --watch",
+    "build": "cd client && webpack",
     "start-dev": "nodemon server.js",
     "sass": "sass --watch client/public/scss/styles.scss:client/public/styles.css",
     "heroku-postbuild": "cd client yarn install && yarn install && npm run build"
