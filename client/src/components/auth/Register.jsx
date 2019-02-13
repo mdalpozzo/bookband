@@ -62,13 +62,17 @@ class Register extends Component {
       { label: 'artist', value: 'artist' }
     ];
 
+    const headline = `${this.props.regType
+      .charAt(0)
+      .toUpperCase()}${this.props.regType.slice(1)} Sign Up`;
+
     return (
       <div className="register">
         <div className="container-fluid">
           <div className="row">
             <div className="container-fluid register-inner">
               <div className="col-lg-6 main-input">
-                <h1 className="display-4 text-center">Sign Up</h1>
+                <h1 className="display-4 text-center">{headline}</h1>
                 <p className="lead text-center">
                   Create your {this.props.regType} account!
                 </p>
