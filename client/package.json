@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-dev": "webpack --watch"
+    "build-dev": "webpack --watch",
+    "build": "webpack"
   },
   "engines": {
     "node": "10.4.0"
