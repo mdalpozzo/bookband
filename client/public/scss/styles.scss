@@ -190,6 +190,28 @@ $colors: (
 .parallax-mainpage {
   height: 500px;
   background-color: #00000073;
+  @include for-phone-only {
+    display: none;
+  }
+  @include for-tablet-portrait-up {
+    display: none;
+  }
+  @include for-tablet-landscape-up {
+    display: block;
+  }
+}
+
+.non-parallax-mainpage {
+  height: 500px;
+  @include for-phone-only {
+    display: block;
+  }
+  @include for-tablet-portrait-up {
+    display: block;
+  }
+  @include for-tablet-landscape-up {
+    display: none;
+  }
 }
 
 .mainpic {
@@ -202,7 +224,7 @@ $colors: (
     width: 50rem;
   }
   @include for-tablet-portrait-up {
-    width: 120rem;
+    width: 50rem;
   }
   @include for-tablet-landscape-up {
     width: 100%;

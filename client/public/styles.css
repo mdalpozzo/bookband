@@ -168,6 +168,40 @@ html {
   height: 500px;
   background-color: #00000073;
 }
+@media (max-width: 500px) {
+  .parallax-mainpage {
+    display: none;
+  }
+}
+@media (min-width: 500px) {
+  .parallax-mainpage {
+    display: none;
+  }
+}
+@media (min-width: 700px) {
+  .parallax-mainpage {
+    display: block;
+  }
+}
+
+.non-parallax-mainpage {
+  height: 500px;
+}
+@media (max-width: 500px) {
+  .non-parallax-mainpage {
+    display: block;
+  }
+}
+@media (min-width: 500px) {
+  .non-parallax-mainpage {
+    display: block;
+  }
+}
+@media (min-width: 700px) {
+  .non-parallax-mainpage {
+    display: none;
+  }
+}
 
 .mainpic {
   position: absolute;
@@ -183,7 +217,7 @@ html {
 }
 @media (min-width: 500px) {
   .mainpic {
-    width: 120rem;
+    width: 50rem;
   }
 }
 @media (min-width: 700px) {

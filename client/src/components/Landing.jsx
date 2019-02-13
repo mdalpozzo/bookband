@@ -109,6 +109,13 @@ class Landing extends Component {
             </div>
           </div>
         </Parallax>
+        <div className="non-parallax-mainpage banner">
+          <div className="leads">
+            <h1>Book Band</h1>
+            <h2>Book your band/act or find talent for your venue</h2>
+          </div>
+          <img className="mainpic" src={this.state.mainpic} />
+        </div>
         <div className="banner">
           <div
             className={`artistorhost ${classHideBanner}`}
@@ -189,6 +196,13 @@ class Landing extends Component {
             </div>
           </div>
         </Parallax>
+        <div className="non-parallax-mainpage banner">
+          <div className="leads">
+            <h1>We connect talent with venues</h1>
+            <h2>We'll get that demo in the right hands</h2>
+          </div>
+          <img className="mainpic" src={this.state.secondpic} />
+        </div>
         <div className="about-banner">
           <h2>We connect talent with parties!</h2>
           <div>blah blah</div>
