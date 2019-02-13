@@ -17,7 +17,8 @@ class Register extends Component {
       email: '',
       password: '',
       password2: '',
-      errors: {},
+      userType: '',
+      errors: {}
     };
   }
 
@@ -27,11 +28,11 @@ class Register extends Component {
   //   }
   // }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.errors) {
-  //     this.setState({ errors: nextProps.errors });
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -45,6 +46,7 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2,
+      userType: this.props.regType
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -53,11 +55,11 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
 
-     // Select options for status
+    // Select options for status
     const options = [
       { label: '* Select Status', value: 0 },
       { label: 'host', value: 'host' },
-      { label: 'artist', value: 'artist' },
+      { label: 'artist', value: 'artist' }
     ];
 
     return (
@@ -67,10 +69,19 @@ class Register extends Component {
             <div className="container-fluid register-inner">
               <div className="col-lg-6 main-input">
                 <h1 className="display-4 text-center">Sign Up</h1>
-                <p className="lead text-center">Create your {this.props.regType} account!</p>
-                <form noValidate onSubmit={this.onSubmit} tabIndex={this.props.regTabIndex}>
+                <p className="lead text-center">
+                  Create your {this.props.regType} account!
+                </p>
+                <form
+                  noValidate
+                  onSubmit={this.onSubmit}
+                  tabIndex={this.props.regTabIndex}
+                >
                   <TextFieldGroup
                     placeholder="Name"
+                    // className={classnames('', {
+                    //   'is-invalid': errors.name
+                    // })}
                     name="name"
                     type="name"
                     value={this.state.name}
@@ -100,23 +111,26 @@ class Register extends Component {
                   <TextFieldGroup
                     placeholder="Confirm password"
                     name="password2"
-                    type="password2"
+                    type="password"
                     value={this.state.password2}
                     onChange={this.onChange}
                     error={errors.password2}
                     tabIndex={this.props.regTabIndex}
                   />
-                  <SelectListGroup
-                  placeholder="userType"
-                  name="userType"
-                  // value={this.props.regType}
-                  defaultValue={this.props.regType}
-                  options={options}
-                  error={errors.userType}
-                  info="Are you an artist/performer or a host/vendor?"
-                  tabIndex={this.props.regTabIndex}
-                />
-                  <input type="submit" className="btn btn-info btn-block mt-4" tabIndex={this.props.regTabIndex} />
+                  {/* <SelectListGroup
+                    placeholder="userType"
+                    name="userType"
+                    value={this.props.regType}
+                    options={options}
+                    error={errors.userType}
+                    info="Are you an artist/performer or a host/vendor?"
+                    tabIndex={this.props.regTabIndex}
+                  /> */}
+                  <input
+                    type="submit"
+                    className="btn btn-info btn-block mt-4 reg-submit"
+                    tabIndex={this.props.regTabIndex}
+                  />
                 </form>
               </div>
             </div>
@@ -130,20 +144,20 @@ class Register extends Component {
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired
   }).isRequired,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors,
+  errors: state.errors
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      registerUser,
+      registerUser
     },
     dispatch
   );

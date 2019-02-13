@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Parallax, Background } from 'react-parallax';
 
-import Register from "./auth/Register.jsx";
+import Register from './auth/Register.jsx';
 
 class Landing extends Component {
   constructor() {
@@ -25,9 +25,9 @@ class Landing extends Component {
       bannerButtonsDisabled: false,
       artistRegTabIndex: -1,
       hostRegTabIndex: -1,
-      bannerTabIndex: null,
+      bannerTabIndex: null
     };
-  };
+  }
 
   onClickArtistReg = () => {
     this.setState({
@@ -36,7 +36,7 @@ class Landing extends Component {
       regType: 'artist',
       bannerButtonsDisabled: true,
       bannerTabIndex: -1,
-      artistRegTabIndex: null,
+      artistRegTabIndex: null
     });
   };
 
@@ -47,7 +47,7 @@ class Landing extends Component {
       regType: 'host',
       bannerButtonsDisabled: true,
       bannerTabIndex: -1,
-      hostRegTabIndex: null,
+      hostRegTabIndex: null
     });
   };
 
@@ -61,7 +61,7 @@ class Landing extends Component {
       bannerButtonsDisabled: false,
       artistRegTabIndex: -1,
       hostRegTabIndex: -1,
-      bannerTabIndex: null,
+      bannerTabIndex: null
     });
   };
 
@@ -72,15 +72,15 @@ class Landing extends Component {
     highresimg2.onload = () => {
       this.setState({
         mainpic: this.state.highres,
-        secondpic: this.state.highressecond,
+        secondpic: this.state.highressecond
       });
     };
-  
+
     highresimg.onload = () => {
       highresimg2.src = this.state.highressecond;
     };
     highresimg.src = this.state.highres;
-  };
+  }
 
   render() {
     let classHideBanner = '';
@@ -89,60 +89,105 @@ class Landing extends Component {
     } else if (this.state.isHideBannerRight) {
       classHideBanner = 'hide-banner-right';
     }
-    const classHideArtistReg = this.state.isHideArtistReg ? 'hide-artist-reg' : '';
+    const classHideArtistReg = this.state.isHideArtistReg
+      ? 'hide-artist-reg'
+      : '';
     const classHideHostReg = this.state.isHideHostReg ? 'hide-host-reg' : '';
 
     return (
       <div className="landing">
         <Parallax
-            blur={0}
-            bgImage={this.state.mainpic}
-            bgImageAlt="microphone"
-            strength={800}
+          blur={0}
+          bgImage={this.state.mainpic}
+          bgImageAlt="microphone"
+          strength={800}
         >
-        <div className="parallax-mainpage">
-          <div className="leads">
-            <h1>Book Band</h1>
-            <h2>Book your band/act or find talent for your venue</h2>
+          <div className="parallax-mainpage">
+            <div className="leads">
+              <h1>Book Band</h1>
+              <h2>Book your band/act or find talent for your venue</h2>
+            </div>
           </div>
-        </div>
         </Parallax>
         <div className="banner">
-          <div className={`artistorhost ${classHideBanner}`} tabIndex={this.state.bannerTabIndex}>
+          <div
+            className={`artistorhost ${classHideBanner}`}
+            tabIndex={this.state.bannerTabIndex}
+          >
             <div id="artist">
               <p>are you an artist or group looking for gigs?</p>
-              <button onClick={this.onClickArtistReg} disabled={this.state.bannerButtonsDisabled} tabIndex={this.state.bannerTabIndex}>Artist/Performer Sign Up</button>
+              <button
+                onClick={this.onClickArtistReg}
+                disabled={this.state.bannerButtonsDisabled}
+                tabIndex={this.state.bannerTabIndex}
+              >
+                Artist/Performer Sign Up
+              </button>
               <span>or</span>
-              <button disabled={this.state.bannerButtonsDisabled} tabIndex={this.state.bannerTabIndex}>See Venue/Vendor Listings</button>
+              <button
+                disabled={this.state.bannerButtonsDisabled}
+                tabIndex={this.state.bannerTabIndex}
+              >
+                See Venue/Vendor Listings
+              </button>
             </div>
             <div id="host">
               <p>are you a venue or event looking for awesome performers?</p>
-              <button onClick={this.onClickHostReg} disabled={this.state.bannerButtonsDisabled} tabIndex={this.state.bannerTabIndex}>Vendor Sign Up</button>
+              <button
+                onClick={this.onClickHostReg}
+                disabled={this.state.bannerButtonsDisabled}
+                tabIndex={this.state.bannerTabIndex}
+              >
+                Vendor Sign Up
+              </button>
               <span>or</span>
-              <button disabled={this.state.bannerButtonsDisabled} tabIndex={this.state.bannerTabIndex}>See Performer Listings</button>
+              <button
+                disabled={this.state.bannerButtonsDisabled}
+                tabIndex={this.state.bannerTabIndex}
+              >
+                See Performer Listings
+              </button>
             </div>
           </div>
           <div className={`artist-reg ${classHideArtistReg}`}>
-            <button onClick={this.closeReg} tabIndex={this.state.artistRegTabIndex}>Go Back</button>
-            <Register regType={this.state.regType} regTabIndex={this.state.artistRegTabIndex}/>
+            <button
+              className="btn btn-info reg-back-button"
+              onClick={this.closeReg}
+              tabIndex={this.state.artistRegTabIndex}
+            >
+              Go Back
+            </button>
+            <Register
+              regType={this.state.regType}
+              regTabIndex={this.state.artistRegTabIndex}
+            />
           </div>
           <div className={`host-reg ${classHideHostReg}`}>
-            <button onClick={this.closeReg} tabIndex={this.state.hostRegTabIndex}>Go Back</button>
-            <Register regType={this.state.regType} regTabIndex={this.state.hostRegTabIndex}/>
+            <button
+              className="btn btn-info reg-back-button"
+              onClick={this.closeReg}
+              tabIndex={this.state.hostRegTabIndex}
+            >
+              Go Back
+            </button>
+            <Register
+              regType={this.state.regType}
+              regTabIndex={this.state.hostRegTabIndex}
+            />
           </div>
         </div>
         <Parallax
-            blur={0}
-            bgImage={this.state.secondpic}
-            bgImageAlt="microphone"
-            strength={400}
+          blur={0}
+          bgImage={this.state.secondpic}
+          bgImageAlt="microphone"
+          strength={400}
         >
-        <div className="parallax-mainpage">
-          <div className="leads">
-            <h1>We connect talent with venues</h1>
-            <h2>We'll get that demo in the right hands</h2>
+          <div className="parallax-mainpage">
+            <div className="leads">
+              <h1>We connect talent with venues</h1>
+              <h2>We'll get that demo in the right hands</h2>
+            </div>
           </div>
-        </div>
         </Parallax>
         <div className="about-banner">
           <h2>We connect talent with parties!</h2>
@@ -151,8 +196,8 @@ class Landing extends Component {
         </div>
       </div>
     );
-  };
-};
+  }
+}
 
 // Landing.propTypes = {
 //   getProfileByTool: PropTypes.func.isRequired,

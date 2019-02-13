@@ -218,7 +218,8 @@ html {
     height: 15rem;
   }
 }
-.artistorhost #artist, .artistorhost #host {
+.artistorhost #artist,
+.artistorhost #host {
   width: 45%;
   margin: 2% 1.5%;
   height: 80%;
@@ -227,23 +228,28 @@ html {
   float: left;
   padding: 0 15px;
 }
-.artistorhost #artist p, .artistorhost #host p {
+.artistorhost #artist p,
+.artistorhost #host p {
   margin-top: 1rem;
 }
 @media (max-width: 500px) {
-  .artistorhost #artist p, .artistorhost #host p {
+  .artistorhost #artist p,
+.artistorhost #host p {
     margin-top: 1rem;
   }
 }
 @media (min-width: 700px) {
-  .artistorhost #artist p, .artistorhost #host p {
+  .artistorhost #artist p,
+.artistorhost #host p {
     margin-top: 1rem;
   }
 }
-.artistorhost #artist button, .artistorhost #host button {
+.artistorhost #artist button,
+.artistorhost #host button {
   margin: 0 5px;
 }
-.artistorhost #artist button, .artistorhost #host button {
+.artistorhost #artist button,
+.artistorhost #host button {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5d87cf), color-stop(1, #1e66bd));
   background: -moz-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
   background: -webkit-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
@@ -263,7 +269,8 @@ html {
   text-decoration: none;
   text-shadow: 0px 1px 0px #283966;
 }
-.artistorhost #artist button:hover, .artistorhost #host button:hover {
+.artistorhost #artist button:hover,
+.artistorhost #host button:hover {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #1e66bd), color-stop(1, #5d87cf));
   background: -moz-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
   background: -webkit-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
@@ -273,7 +280,8 @@ html {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e66bd", endColorstr="#5d87cf",GradientType=0);
   background-color: #1e66bd;
 }
-.artistorhost #artist button:active, .artistorhost #host button:active {
+.artistorhost #artist button:active,
+.artistorhost #host button:active {
   position: relative;
   top: 1px;
 }
@@ -316,9 +324,37 @@ html {
   margin: auto;
 }
 
+.reg-submit,
+.reg-back-button {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5d87cf), color-stop(1, #1e66bd));
+  background: -moz-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
+  background: -webkit-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
+  background: -o-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
+  background: -ms-linear-gradient(top, #5d87cf 5%, #1e66bd 100%);
+  background: linear-gradient(to bottom, #5d87cf 5%, #1e66bd 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5d87cf", endColorstr="#1e66bd",GradientType=0);
+  background-color: #5d87cf;
+}
+.reg-submit:hover,
+.reg-back-button:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #1e66bd), color-stop(1, #5d87cf));
+  background: -moz-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
+  background: -webkit-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
+  background: -o-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
+  background: -ms-linear-gradient(top, #1e66bd 5%, #5d87cf 100%);
+  background: linear-gradient(to bottom, #1e66bd 5%, #5d87cf 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e66bd", endColorstr="#5d87cf",GradientType=0);
+  background-color: #1e66bd;
+}
+.reg-submit:active,
+.reg-back-button:active {
+  position: relative;
+  top: 1px;
+}
+
 /* navbar ============================================================================*/
 .navbar-container {
-  background: #3B5B98;
+  background: #3b5b98;
   width: 100%;
   height: 65px;
   padding-top: 20px;

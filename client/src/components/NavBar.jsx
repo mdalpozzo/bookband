@@ -14,20 +14,19 @@ class NavBar extends Component {
       isHideNav: false,
       email: '',
       password: '',
-      errors: {},
+      errors: {}
     };
-  };
+  }
 
   hideBar = () => {
-    const { isHideNav } = this.state
+    const { isHideNav } = this.state;
 
-    window.scrollY > this.prev ?
-    !isHideNav && this.setState({ isHideNav: true })
-    :
-    isHideNav && this.setState({ isHideNav: false });
+    window.scrollY > this.prev
+      ? !isHideNav && this.setState({ isHideNav: true })
+      : isHideNav && this.setState({ isHideNav: false });
 
     this.prev = window.scrollY;
- };
+  };
 
   onClick = e => {
     if (document.body.className !== 'open') {
@@ -46,17 +45,17 @@ class NavBar extends Component {
 
     const userData = {
       email: this.state.email,
-      password: this.state.password,
+      password: this.state.password
     };
 
     this.props.loginUser(userData);
   };
 
-  componentDidMount(){
+  componentDidMount() {
     window.addEventListener('scroll', this.hideBar);
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener('scroll', this.hideBar);
   }
 
@@ -76,7 +75,7 @@ class NavBar extends Component {
         <nav>
           <a href="#" id="menu-icon" />
           <ul className="menu">
-            <li onClick={this.onClick}>
+            {/* <li onClick={this.onClick}>
               <Link className="navlink" to="/">
                 Home
               </Link>
@@ -90,7 +89,7 @@ class NavBar extends Component {
               <Link className="navlink" to="/work">
                 Work
               </Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
         <div className="login-form-container">
@@ -111,7 +110,9 @@ class NavBar extends Component {
               onChange={this.onChange}
               // error={errors.password}
             />
-            <button type="Submit" value="Log In" className="btn login-button">Log In</button>
+            <button type="Submit" value="Log In" className="btn login-button">
+              Log In
+            </button>
           </form>
         </div>
       </div>

@@ -1,1 +1,4 @@
 export const REGISTER_ARTIST = 'REGISTER_ARTIST';
+
+export const GET_ERRORS = 'GET_ERRORS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
