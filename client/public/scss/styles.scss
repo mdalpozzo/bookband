@@ -173,10 +173,10 @@ $colors: (
   position: relative;
   overflow: hidden;
   @include for-phone-only {
-    height: 350px;
+    height: 300px;
   }
   @include for-tablet-portrait-up {
-    height: 350px;
+    height: 300px;
   }
   @include for-tablet-landscape-up {
     height: 350px;

@@ -130,13 +130,13 @@ class Landing extends Component {
               >
                 Artist/Performer Sign Up
               </button>
-              <span>or</span>
+              {/* <span>or</span>
               <button
                 disabled={this.state.bannerButtonsDisabled}
                 tabIndex={this.state.bannerTabIndex}
               >
                 See Venue/Vendor Listings
-              </button>
+              </button> */}
             </div>
             <div id="host">
               <p>are you a venue or event looking for awesome performers?</p>
@@ -147,13 +147,13 @@ class Landing extends Component {
               >
                 Vendor Sign Up
               </button>
-              <span>or</span>
+              {/* <span>or</span>
               <button
                 disabled={this.state.bannerButtonsDisabled}
                 tabIndex={this.state.bannerTabIndex}
               >
                 See Performer Listings
-              </button>
+              </button> */}
             </div>
           </div>
           <div className={`artist-reg ${classHideArtistReg}`}>

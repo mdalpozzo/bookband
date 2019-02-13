@@ -146,12 +146,12 @@ html {
 }
 @media (max-width: 500px) {
   .banner {
-    height: 350px;
+    height: 300px;
   }
 }
 @media (min-width: 500px) {
   .banner {
-    height: 350px;
+    height: 300px;
   }
 }
 @media (min-width: 700px) {
