@@ -97,10 +97,10 @@ class Landing extends Component {
     return (
       <div className="landing">
         <Parallax
-          blur={0}
+          // blur={{ min: -100, max: 100 }}
           bgImage={this.state.mainpic}
           bgImageAlt="microphone"
-          strength={800}
+          strength={-200}
         >
           <div className="parallax-mainpage">
             <div className="leads">
