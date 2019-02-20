@@ -100,7 +100,7 @@ class Landing extends Component {
           // blur={{ min: -100, max: 100 }}
           bgImage={this.state.mainpic}
           bgImageAlt="microphone"
-          strength={-200}
+          strength={-400}
         >
           <div className="parallax-mainpage">
             <div className="leads">
