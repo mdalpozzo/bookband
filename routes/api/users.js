@@ -40,7 +40,7 @@ router.post('/register_artist', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        userType: req.body.userType
+        userType: req.body.userType,
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -79,7 +79,7 @@ router.post('/register_host', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        userType: req.body.userType
+        userType: req.body.userType,
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -96,10 +96,10 @@ router.post('/register_host', (req, res) => {
   });
 });
 
-// @route   POST api/users/artist_login
-// @desc    Login an artist user
+// @route   POST api/users/login
+// @desc    Login a user
 // @access  Public
-router.post('/login_artist', (req, res) => {
+router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
   //check validation
@@ -109,113 +109,87 @@ router.post('/login_artist', (req, res) => {
 
   const email = req.body.email;
   const password = req.body.password;
+  const userType = req.body.userType;
 
-  // find user by email
-  ArtistUser.findOne({ email }).then(user => {
-    //check for user
-    if (!user) {
-      errors.email = 'An artist user account is not found with this email';
-      return res.status(404).json(errors);
-    }
+  if (userType === 'artist') {
+    // find user by email
+    ArtistUser.findOne({ email }).then(user => {
+      //check for user
+      if (!user) {
+        errors.login.email = 'An artist user account is not found with this email';
+        return res.status(404).json(errors);
+      }
 
-    //check password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        //user matched
+      //check password
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          //user matched
 
-        const payload = {
-          id: user.id,
-          name: user.name,
-          userType: user.userType
-        };
+          const payload = {
+            id: user.id,
+            name: user.name,
+            userType: user.userType,
+          };
 
-        //sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          { expiresIn: 10000 },
-          (err, token) => {
+          //sign token
+          jwt.sign(payload, keys.secretOrKey, { expiresIn: 10000 }, (err, token) => {
             res.json({
               success: true,
-              token: 'Bearer ' + token
+              token: 'Bearer ' + token,
             });
-          }
-        );
-      } else {
-        errors.password = 'Password incorrect';
-        return res.status(400).json(errors);
-      }
+          });
+        } else {
+          errors.login.password = 'Password incorrect';
+          return res.status(400).json(errors);
+        }
+      });
     });
-  });
-});
+  } else if (userType === 'host') {
+    // find user by email
+    HostUser.findOne({ email }).then(user => {
+      //check for user
+      if (!user) {
+        errors.login.email = 'A Host user account is not found with this email';
+        return res.status(404).json(errors);
+      }
 
-// @route   POST api/users/host_login
-// @desc    Login a host user
-// @access  Public
-router.post('/login_host', (req, res) => {
-  const { errors, isValid } = validateLoginInput(req.body);
+      //check password
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          //user matched
 
-  //check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
+          const payload = {
+            id: user.id,
+            name: user.name,
+            userType: user.userType,
+          };
+
+          //sign token
+          jwt.sign(payload, keys.secretOrKey, { expiresIn: 10000 }, (err, token) => {
+            res.json({
+              success: true,
+              token: 'Bearer ' + token,
+            });
+          });
+        } else {
+          errors.login.password = 'Password incorrect';
+          return res.status(400).json(errors);
+        }
+      });
+    });
   }
-
-  const email = req.body.email;
-  const password = req.body.password;
-
-  // find user by email
-  HostUser.findOne({ email }).then(user => {
-    //check for user
-    if (!user) {
-      errors.email = 'A Host user account is not found with this email';
-      return res.status(404).json(errors);
-    }
-
-    //check password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        //user matched
-
-        const payload = {
-          id: user.id,
-          name: user.name,
-          userType: user.userType
-        };
-
-        //sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          { expiresIn: 10000 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: 'Bearer ' + token
-            });
-          }
-        );
-      } else {
-        errors.password = 'Password incorrect';
-        return res.status(400).json(errors);
-      }
-    });
-  });
 });
 
 // @route   GET api/users/current
 // @desc    Return current user
 // @access  Private
-router.get(
-  '/current',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.json({
-      name: req.user.name,
-      id: req.user.id,
-      email: req.user.email,
-      userType: req.user.userType
-    });
-  }
-);
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.json({
+    name: req.user.name,
+    id: req.user.id,
+    email: req.user.email,
+    userType: req.user.userType,
+  });
+});
 
 module.exports = router;

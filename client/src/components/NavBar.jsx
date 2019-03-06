@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classnames from 'classnames';
+
+import { loginUser } from '../actions/authActions';
+
+import isEmpty from '../validation/is-empty';
 
 import TextFieldGroup from './common/TextFieldGroup.jsx';
+import SelectListGroup from './common/SelectListGroup.jsx';
 
 class NavBar extends Component {
   constructor() {
@@ -14,7 +20,10 @@ class NavBar extends Component {
       isHideNav: false,
       email: '',
       password: '',
-      errors: {}
+      userType: '',
+      errors: {
+        login: {},
+      },
     };
   }
 
@@ -45,14 +54,34 @@ class NavBar extends Component {
 
     const userData = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      userType: this.state.userType,
     };
 
     this.props.loginUser(userData);
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.errors !== this.props.errors) {
+      this.setState({
+        errors: this.props.errors,
+      });
+    }
+  }
+
+  static getDerivedStatefromProps(props, state) {
+    if (props.errors) {
+      return { errors: props.errors };
+    } else {
+      return null;
+    }
+  }
+
   componentDidMount() {
     window.addEventListener('scroll', this.hideBar);
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/artistDashboard');
+    }
   }
 
   componentWillUnmount() {
@@ -60,7 +89,14 @@ class NavBar extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     const classHide = this.state.isHideNav ? 'hide-nav' : '';
+    // Select options for status
+    const options = [
+      { label: '* artist or host?', value: 0 },
+      { label: 'host', value: 'host' },
+      { label: 'artist', value: 'artist' },
+    ];
 
     return (
       <div className={`navbar-container ${classHide}`}>
@@ -98,18 +134,41 @@ class NavBar extends Component {
               placeholder="Email Address"
               name="email"
               type="email"
+              className={classnames('form-control', {
+                'is-invalid': errors.login.email,
+              })}
               value={this.state.email}
               onChange={this.onChange}
-              // error={errors.email}
+              error={errors.login.email}
             />
+            {errors.login.email && <div className="invalid-feedback">{errors.login.email}</div>}
             <TextFieldGroup
               placeholder="Password"
               name="password"
               type="password"
+              className={classnames('form-control', {
+                'is-invalid': errors.login.password,
+              })}
               value={this.state.password}
               onChange={this.onChange}
-              // error={errors.password}
+              error={errors.login.password}
             />
+            {errors.login.password && (
+              <div className="invalid-feedback">{errors.login.password}</div>
+            )}
+            <SelectListGroup
+              placeholder="userType"
+              className={classnames('form-control', {
+                'is-invalid': errors.login.userType,
+              })}
+              name="userType"
+              options={options}
+              onChange={this.onChange}
+              error={errors.login.userType}
+            />
+            {errors.login.userType && (
+              <div className="invalid-feedback">{errors.login.userType}</div>
+            )}
             <button type="Submit" value="Log In" className="btn login-button">
               Log In
             </button>
@@ -120,15 +179,18 @@ class NavBar extends Component {
   }
 }
 
-// NavBar.propTypes = {
-//   getProfileByTool: PropTypes.func.isRequired,
-//   getAllLenders: PropTypes.func.isRequired,
-//   // errors: PropTypes.object.isRequired,
-// };
+NavBar.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ loginUser }, dispatch);
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors,
+});
 
 export default connect(
   mapStateToProps,

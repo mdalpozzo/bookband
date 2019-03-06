@@ -1,10 +1,12 @@
-import * as types from '../actions/actionTypes';
+import { GET_ERRORS } from '../actions/actionTypes';
 
-const initialState = {};
+const initialState = {
+  login: {},
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case types.GET_ERRORS:
+    case GET_ERRORS:
       return action.payload;
     default:
       return state;

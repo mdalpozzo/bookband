@@ -18,7 +18,7 @@ class Register extends Component {
       password: '',
       password2: '',
       userType: '',
-      errors: {}
+      errors: {},
     };
   }
 
@@ -28,9 +28,19 @@ class Register extends Component {
   //   }
   // }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.errors !== this.props.errors) {
+      this.setState({
+        errors: this.props.errors,
+      });
+    }
+  }
+
+  static getDerivedStatefromProps(props, state) {
+    if (props.errors) {
+      return { errors: props.errors };
+    } else {
+      return null;
     }
   }
 
@@ -46,7 +56,7 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2,
-      userType: this.props.regType
+      userType: this.props.regType,
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -59,12 +69,12 @@ class Register extends Component {
     const options = [
       { label: '* Select Status', value: 0 },
       { label: 'host', value: 'host' },
-      { label: 'artist', value: 'artist' }
+      { label: 'artist', value: 'artist' },
     ];
 
-    const headline = `${this.props.regType
-      .charAt(0)
-      .toUpperCase()}${this.props.regType.slice(1)} Sign Up`;
+    const headline = `${this.props.regType.charAt(0).toUpperCase()}${this.props.regType.slice(
+      1
+    )} Sign Up`;
 
     return (
       <div className="register">
@@ -73,14 +83,8 @@ class Register extends Component {
             <div className="container-fluid register-inner">
               <div className="col-lg-6 main-input">
                 <h1 className="display-4 text-center">{headline}</h1>
-                <p className="lead text-center">
-                  Create your {this.props.regType} account!
-                </p>
-                <form
-                  noValidate
-                  onSubmit={this.onSubmit}
-                  tabIndex={this.props.regTabIndex}
-                >
+                <p className="lead text-center">Create your {this.props.regType} account!</p>
+                <form noValidate onSubmit={this.onSubmit} tabIndex={this.props.regTabIndex}>
                   <TextFieldGroup
                     placeholder="Name"
                     // className={classnames('', {
@@ -148,20 +152,20 @@ class Register extends Component {
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired,
   }).isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      registerUser
+      registerUser,
     },
     dispatch
   );
