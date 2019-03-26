@@ -13,13 +13,13 @@ export const registerUser = (userData, history) => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data,
+        payload: err.response.data
       });
     });
 };
 
 //login - get user token
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, history) => dispatch => {
   const route = `/api/users/login`;
   axios
     .post(route, userData)
@@ -34,12 +34,13 @@ export const loginUser = userData => dispatch => {
       const decoded = jwt_decode(token);
       // set current user
       dispatch(setCurrentUser(decoded));
+      history.push('/dashboard');
     })
     .catch(err => {
       console.log(err.response.data);
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data,
+        payload: err.response.data
       });
     });
 };
@@ -48,6 +49,6 @@ export const loginUser = userData => dispatch => {
 export const setCurrentUser = decoded => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded,
+    payload: decoded
   };
 };

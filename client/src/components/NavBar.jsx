@@ -4,6 +4,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
+import { withRouter } from 'react-router-dom';
 
 import { loginUser } from '../actions/authActions';
 
@@ -22,8 +23,8 @@ class NavBar extends Component {
       password: '',
       userType: '',
       errors: {
-        login: {},
-      },
+        login: {}
+      }
     };
   }
 
@@ -55,16 +56,16 @@ class NavBar extends Component {
     const userData = {
       email: this.state.email,
       password: this.state.password,
-      userType: this.state.userType,
+      userType: this.state.userType
     };
 
-    this.props.loginUser(userData);
+    this.props.loginUser(userData, this.props.history);
   };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.errors !== this.props.errors) {
       this.setState({
-        errors: this.props.errors,
+        errors: this.props.errors
       });
     }
   }
@@ -95,7 +96,7 @@ class NavBar extends Component {
     const options = [
       { label: '* artist or host?', value: 0 },
       { label: 'host', value: 'host' },
-      { label: 'artist', value: 'artist' },
+      { label: 'artist', value: 'artist' }
     ];
 
     return (
@@ -135,19 +136,21 @@ class NavBar extends Component {
               name="email"
               type="email"
               className={classnames('form-control', {
-                'is-invalid': errors.login.email,
+                'is-invalid': errors.login.email
               })}
               value={this.state.email}
               onChange={this.onChange}
               error={errors.login.email}
             />
-            {errors.login.email && <div className="invalid-feedback">{errors.login.email}</div>}
+            {errors.login.email && (
+              <div className="invalid-feedback">{errors.login.email}</div>
+            )}
             <TextFieldGroup
               placeholder="Password"
               name="password"
               type="password"
               className={classnames('form-control', {
-                'is-invalid': errors.login.password,
+                'is-invalid': errors.login.password
               })}
               value={this.state.password}
               onChange={this.onChange}
@@ -159,7 +162,7 @@ class NavBar extends Component {
             <SelectListGroup
               placeholder="userType"
               className={classnames('form-control', {
-                'is-invalid': errors.login.userType,
+                'is-invalid': errors.login.userType
               })}
               name="userType"
               options={options}
@@ -182,17 +185,18 @@ class NavBar extends Component {
 NavBar.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ loginUser }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ loginUser }, dispatch);
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors,
+  errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NavBar);
+)(withRouter(NavBar));

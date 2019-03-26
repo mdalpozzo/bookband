@@ -18,7 +18,9 @@ class Register extends Component {
       password: '',
       password2: '',
       userType: '',
-      errors: {},
+      errors: {
+        register: {}
+      }
     };
   }
 
@@ -31,7 +33,7 @@ class Register extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.errors !== this.props.errors) {
       this.setState({
-        errors: this.props.errors,
+        errors: this.props.errors
       });
     }
   }
@@ -56,7 +58,7 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2,
-      userType: this.props.regType,
+      userType: this.props.regType
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -69,12 +71,12 @@ class Register extends Component {
     const options = [
       { label: '* Select Status', value: 0 },
       { label: 'host', value: 'host' },
-      { label: 'artist', value: 'artist' },
+      { label: 'artist', value: 'artist' }
     ];
 
-    const headline = `${this.props.regType.charAt(0).toUpperCase()}${this.props.regType.slice(
-      1
-    )} Sign Up`;
+    const headline = `${this.props.regType
+      .charAt(0)
+      .toUpperCase()}${this.props.regType.slice(1)} Sign Up`;
 
     return (
       <div className="register">
@@ -83,48 +85,83 @@ class Register extends Component {
             <div className="container-fluid register-inner">
               <div className="col-lg-6 main-input">
                 <h1 className="display-4 text-center">{headline}</h1>
-                <p className="lead text-center">Create your {this.props.regType} account!</p>
-                <form noValidate onSubmit={this.onSubmit} tabIndex={this.props.regTabIndex}>
+                <p className="lead text-center">
+                  Create your {this.props.regType} account!
+                </p>
+                <form
+                  noValidate
+                  onSubmit={this.onSubmit}
+                  tabIndex={this.props.regTabIndex}
+                >
                   <TextFieldGroup
                     placeholder="Name"
-                    // className={classnames('', {
-                    //   'is-invalid': errors.name
-                    // })}
+                    className={classnames('form-control', {
+                      'is-invalid': errors.register.name
+                    })}
                     name="name"
                     type="name"
                     value={this.state.name}
                     onChange={this.onChange}
-                    error={errors.name}
+                    error={errors.register.name}
                     tabIndex={this.props.regTabIndex}
                   />
+                  {errors.register.name && (
+                    <div className="invalid-feedback">
+                      {errors.register.name}
+                    </div>
+                  )}
                   <TextFieldGroup
                     placeholder="Email address"
+                    className={classnames('form-control', {
+                      'is-invalid': errors.register.email
+                    })}
                     name="email"
                     type="email"
                     value={this.state.email}
                     onChange={this.onChange}
-                    error={errors.email}
+                    error={errors.register.email}
                     info=""
                     tabIndex={this.props.regTabIndex}
                   />
+                  {errors.register.email && (
+                    <div className="invalid-feedback">
+                      {errors.register.email}
+                    </div>
+                  )}
                   <TextFieldGroup
                     placeholder="Password"
+                    className={classnames('form-control', {
+                      'is-invalid': errors.register.password
+                    })}
                     name="password"
                     type="password"
                     value={this.state.password}
                     onChange={this.onChange}
-                    error={errors.password}
+                    error={errors.register.password}
                     tabIndex={this.props.regTabIndex}
                   />
+                  {errors.register.password && (
+                    <div className="invalid-feedback">
+                      {errors.register.password}
+                    </div>
+                  )}
                   <TextFieldGroup
                     placeholder="Confirm password"
+                    className={classnames('form-control', {
+                      'is-invalid': errors.register.password2
+                    })}
                     name="password2"
                     type="password"
                     value={this.state.password2}
                     onChange={this.onChange}
-                    error={errors.password2}
+                    error={errors.register.password2}
                     tabIndex={this.props.regTabIndex}
                   />
+                  {errors.register.password2 && (
+                    <div className="invalid-feedback">
+                      {errors.register.password2}
+                    </div>
+                  )}
                   {/* <SelectListGroup
                     placeholder="userType"
                     name="userType"
@@ -152,20 +189,20 @@ class Register extends Component {
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired
   }).isRequired,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors,
+  errors: state.errors
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      registerUser,
+      registerUser
     },
     dispatch
   );

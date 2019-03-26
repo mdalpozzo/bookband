@@ -4,6 +4,7 @@ const isEmpty = require('./is-empty');
 module.exports = function validateLoginInput(data) {
   let errors = {
     login: {},
+    register: {}
   };
 
   data.email = !isEmpty(data.email) ? data.email : '';
@@ -27,6 +28,6 @@ module.exports = function validateLoginInput(data) {
 
   return {
     errors,
-    isValid: isEmpty(errors.login),
+    isValid: isEmpty(errors.login)
   };
 };
